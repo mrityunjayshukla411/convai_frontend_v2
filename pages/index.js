@@ -9,12 +9,11 @@ import axios from "axios";
 export default function Home() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000/";
+  
   const handleSubmit = async () => {
-
+    const url = `${baseUrl}answer_question`;
     let data = {"question" : question}
-    const url = 'https://convai-backend-v2.onrender.com/answer_question';
-
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -54,7 +53,7 @@ export default function Home() {
 
           <div className="p-2 w-full">
             <div className="relative">
-              <label for="message" className="leading-7 text-sm text-gray-400">
+              <label htmlFor="message" className="leading-7 text-sm text-gray-400">
                 What Can I help you with today?
               </label>
               <textarea

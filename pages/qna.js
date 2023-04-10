@@ -13,6 +13,7 @@ const QNA = () => {
   const [message, setMessage] = useState("");
   const [summary, setSummary] = useState("");
   const [riterate, setRiterate] = useState("");
+  const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000/";
 
   const handleAnswerSubmission = async () => {
     let currentQuestion = "";
@@ -23,7 +24,8 @@ const QNA = () => {
         break;
       }
     }
-    const url = "https://convai-backend-v2.onrender.com/check_answers";
+    // const url = "https://convai-backend-v2.onrender.com/check_answers";
+    const url = `${baseUrl}check_answers`;
     let data = { question: currentQuestion, answer: answer };
 
     const response = await fetch(url, {
@@ -58,7 +60,9 @@ const QNA = () => {
 
   const handleTopicSubmission = async () => {
     let data = { subtopic: topic };
-    const url = "https://convai-backend-v2.onrender.com/ask_questions";
+    // const url = "https://convai-backend-v2.onrender.com/ask_questions";
+    const url = `${baseUrl}ask_questions`;
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -85,7 +89,9 @@ const QNA = () => {
 
   const handleSummarise = async () => {
     let data = { subtopics: chat };
-    const url = "https://convai-backend-v2.onrender.com/summarize_topic";
+    // const url = "https://convai-backend-v2.onrender.com/summarize_topic";
+    const url = `${baseUrl}summarize_topic`;
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -100,7 +106,9 @@ const QNA = () => {
   };
   const handleRiterate = async () => {
     let data = { topic: answer };
-    const url = "https://convai-backend-v2.onrender.com/reiterate_topic";
+    // const url = "https://convai-backend-v2.onrender.com/reiterate_topic";
+    const url = `${baseUrl}reiterate_topic`;
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -158,7 +166,7 @@ const QNA = () => {
           <div className="p-2 w-full">
             <div className="relative">
               <div className="relative">
-                <label for="name" className="leading-7 text-sm text-gray-400">
+                <label htmlFor="name" className="leading-7 text-sm text-gray-400">
                   Please Enter the name of the topic you want to learn?
                 </label>
                 <input
@@ -193,7 +201,7 @@ const QNA = () => {
                 </div>
               </div>
 
-              <label for="message" className="leading-7 text-sm text-gray-400">
+              <label htmlFor="message" className="leading-7 text-sm text-gray-400">
                 Enter your answers here (Please enter answer to one question at
                 a time)
               </label>
